@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using SuperHeroes.Models;
 
 namespace SuperHeroes.Data
 {
-    public class HeroesContext : DbContext
+    public class HeroesContext : IdentityDbContext<IdentityUser>
     {
         public HeroesContext(DbContextOptions options) : base(options) { }
         public DbSet<Hero> Hero { get; set; }
@@ -41,6 +43,8 @@ namespace SuperHeroes.Data
                 .HasOne(vw => vw.Weapon)
                 .WithMany(w => w.VillainWeapon)
                 .HasForeignKey(vw => vw.WeaponId);
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

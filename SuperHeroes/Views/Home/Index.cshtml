@@ -1,4 +1,13 @@
-﻿@{
+﻿@model List<Hero>
+<a asp-action="Create" asp-controller="Home">Utwórz</a>
+@foreach (var hero in Model)
+{
+    <p>
+        @Html.DisplayFor(modelItem => hero.Name)
+        @Html.DisplayFor(modelItem => hero.Bio)
+    </p>
+}
+@{
     ViewData["Title"] = "Home Page";
 }
 
